@@ -9,7 +9,7 @@
           <li v-for="item in goods" :key="item.id">
             <RouterLink to="/">
               <img :src="item.picture" alt="">
-              <p class="name">{{item.name}}</p>
+              <p class="name ellipsis">{{item.name}}</p>
               <p class="price">&yen;{{item.price}}</p>
             </RouterLink>
           </li>

@@ -27,3 +27,12 @@ export const findBrand = (limit = 6) => {
   export const findHot = () => {
     return request('home/hot', 'get')
   }
+
+  /**
+   * 
+   * @returns 返回商品
+   */
+  export const findGoods = () => {
+    return request('home/goods', 'get')
+  }
+  
