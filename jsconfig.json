@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "preserve" , // 解决template提示
     "target": "es5",
     "module": "esnext",
     "baseUrl": "./",

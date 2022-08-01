@@ -9,20 +9,32 @@
       </div> 
     </div>
     <!-- 新鲜好物 -->
+    <HomeNew/>
     <!-- 热门推荐 -->
+    <HomeHot/>
 </template>
 
 <script>
-import HomeCategory from './components/home-category.vue';
-import HomeBanner from './components/home-banner.vue';
+import HomeCategory from './components/home-category.vue'
+import HomeBanner from './components/home-banner.vue'
+import HomeNew from './components/home-new.vue'
+import HomeHot from './components/home-hot.vue'
 export default {
     name: "HomePage",
-    components: { HomeCategory, HomeBanner }
+    components: { HomeCategory, HomeBanner, HomeNew, HomeHot }
 }
 </script>
 
 <style scoped lang="less">
-// .container{
-//   .hoverShadow();
-// }
+// 使用tranistion组件实现动画，一个元素或组件的（显示|隐藏，创建|移除）
+
+// 进入前 v-enter (v-enter-from)VUE3
+// 进入中 v-enter-active
+// 进入后 v-enter-to
+
+// 离开前 v-leave (v-leave-from)VUE3
+// 离开中 v-leave-active
+// 离开后 v-leave-to
+
+
 </style>
