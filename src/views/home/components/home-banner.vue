@@ -15,7 +15,6 @@ export default {
       findBanner().then(data => {
         sliders.value = data.result
       })
-
       return { sliders }
     }
 }
