@@ -1,5 +1,4 @@
 <template>
-<!-- 防止报错，加载完成goods再显示所有内容 -->
   <div class='xtx-goods-page' v-if="goods">
     <div class="container">
       <!-- 面包屑 -->
@@ -12,47 +11,72 @@
       <!-- 商品信息 -->
       <div class="goods-info">
         <div class="media">
-          <GoodsImage :images="goods.mainPictures"/>
-          <GoodsSales/>
+          <GoodsImage :images="goods.mainPictures" />
+          <GoodsSales />
         </div>
         <div class="spec">
-          <GoodsName :goods="goods"/>
-          <!-- 规格组件 -->
-          <GoodsSku :goods="goods"/>
+          <GoodsName :goods="goods" />
+          <!-- sku组件 skuId="1369155865461919746" 测试选中 -->
+          <GoodsSku :goods="goods"  @change="changeSku"/>
+          <!-- 数量选择组件 -->
+          <XtxNumbox label="数量" v-model="num" :max="goods.inventory" />
+          <!-- 按钮组件 -->
+          <XtxButton @click="insertCart()" type="primary" style="margin-top:20px">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品推荐 -->
-      <GoodsRelevant />
+      <GoodsRelevant :goodsId="goods.id" />
       <!-- 商品详情 -->
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <div class="goods-tabs"></div>
+          <GoodsTabs />
           <!-- 注意事项 -->
-          <div class="goods-warn"></div>
+          <GoodsWarn />
         </div>
-        <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <!-- 24热榜+周热销榜 -->
+        <div class="goods-aside">
+          <GoodsHot/>
+          <GoodsHot :type="2" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import GoodsRelevant from './components/goods-relevant'
-import { nextTick, ref, watch } from 'vue'
+import { provide, nextTick, ref, watch } from 'vue'
 import { findGoods } from '@/api/product'
 import { useRoute } from 'vue-router'
+import GoodsRelevant from './components/goods-relevant.vue'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales.vue'
 import GoodsName from './components/goods-name.vue'
 import GoodsSku from './components/goods-sku.vue'
+import GoodsTabs from './components/goods-tabs.vue'
+import GoodsHot from './components/goods-hot.vue'
+import GoodsWarn from './components/goods-warn.vue'
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName, GoodsSku },
+  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName, GoodsSku, GoodsTabs, GoodsHot, GoodsWarn },
   setup () {
+    const num = ref(1)
     const goods = useGoods()
-    return { goods }
+
+    // 提供goods数据给后代组件使用
+    provide('goods', goods)
+
+    const changeSku = (sku) => {
+      // console.log(sku)
+      // 修改商品现价，原价，库存信息
+      if (sku.skuId) {
+        goods.value.price = sku.price
+        goods.value.oldPrice = sku.oldPrice
+        goods.value.inventory = sku.inventory
+      }
+    }
+    
+    return { goods, num, changeSku }
   }
 }
 // 获取商品详情
