@@ -14,6 +14,7 @@ import defaultImg from '@/assets/images/200.png' // 默认图片
 // 参数：1. 目录  2. 是否加载子目录  3. 加载的正则匹配
 const importFn = require.context('./', false, /\.vue$/)
 import Message from '@/components/library/Message'
+import Confirm from '@/components/library/Message'
 
 
 export default {
@@ -40,6 +41,7 @@ export default {
 
     // 定义原型函数
     app.config.globalProperties.$message = Message
+    app.config.globalProperties.$confirm = Confirm
   }
 }
 
