@@ -36,7 +36,7 @@
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-code"></i>
-            <Field v-model="form.code" name="code" type="password" placeholder="请输入验证码"/>
+            <Field v-model="form.code" name="code" type="text" placeholder="请输入验证码"/>
             <span @click="send()" class="code">{{timer===0?'发送验证码':`${timer}秒后发送`}}</span>
           </div>
           <div class="error" v-if="errors.code"><i class="iconfont icon-warning" />{{errors.code}}</div>
