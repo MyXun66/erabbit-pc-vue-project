@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '@/store'
+import { h } from 'vue'
 
 const Layout = () => import('@/views/Layout')
 const Home = () => import('@/views/home/index')
@@ -11,6 +12,10 @@ const Cart = () => import('@/views/cart/index')
 const PayCheckout = () => import('@/views/member/pay/checkout')
 const PayIndex = () => import('@/views/member/pay/index')
 const Result = () => import('@/views/member/pay/result')
+const MemberLayout = () => import('@/views/member/Layout')
+const MemberHome = () => import('@/views/member/home')
+const MemberOrder = () => import('@/views/member/order')
+const MemberOrderDetail = () => import('@/views/member/order/detail')
 
 // 路由规则
 const routes = [
@@ -25,7 +30,25 @@ const routes = [
       {path: '/cart', component: Cart },
       { path: '/member/checkout', component: PayCheckout },
       { path: '/member/pay', component: PayIndex },
-      { path: '/pay/collback', component: Result }
+      { path: '/pay/collback', component: Result },
+      {
+        path: '/member',
+        component: MemberLayout,
+        children: [
+          { path: '/member', component: MemberHome },
+          // { path: '/member/order', component: MemberOrder },
+          // { path: '/member/order/:id', component: MemberOrderDetail }
+          {
+            path: '/member/order', 
+            // 创建一个RouterView容器形成嵌套关系
+            component: { render: () => h(<RouterView />) },
+            children: [
+              { path: '', component: MemberOrder },
+              { path: ':id', component: MemberOrderDetail }
+            ]
+          }
+        ]
+      }
     ]
   },
   {path: '/login', component: Login }
