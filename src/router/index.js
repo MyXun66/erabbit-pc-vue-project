@@ -10,6 +10,7 @@ const Login = () => import('@/views/login/index')
 const Cart = () => import('@/views/cart/index')
 const PayCheckout = () => import('@/views/member/pay/checkout')
 const PayIndex = () => import('@/views/member/pay/index')
+const Result = () => import('@/views/member/pay/result')
 
 // 路由规则
 const routes = [
@@ -23,7 +24,8 @@ const routes = [
       {path: '/product/:id', component: Goods },
       {path: '/cart', component: Cart },
       { path: '/member/checkout', component: PayCheckout },
-      { path: '/member/pay', component: PayIndex }
+      { path: '/member/pay', component: PayIndex },
+      { path: '/pay/collback', component: Result }
     ]
   },
   {path: '/login', component: Login }
