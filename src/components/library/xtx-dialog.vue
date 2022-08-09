@@ -79,6 +79,8 @@ export default {
     .body {
       padding: 20px 40px;
       font-size: 16px;
+      max-height: 500px;
+      overflow: auto;
       .icon-warning {
         color: @priceColor;
         margin-right: 3px;
