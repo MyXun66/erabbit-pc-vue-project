@@ -58,7 +58,6 @@ export const useLazyData = (apiFn) => {
 
   // 开启定时器 countdown 倒计时时间
   const start = (countdown) => {
-    console.log(countdown)
     time.value = countdown
     timeText.value = dayjs.unix(time.value).format('mm分ss秒')
     resume()
